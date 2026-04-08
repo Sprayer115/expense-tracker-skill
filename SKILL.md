@@ -1,8 +1,10 @@
 ---
 name: expense-tracker
 description: Log an expense to your Google Sheet by describing it naturally.
-require-secret: true
-homepage: https://github.com/Sprayer115/expense-tracker-skill
+metadata:
+  require-secret: true
+  require-secret-description: Paste your Google Apps Script Web App URL here. See the skill instructions for setup steps.
+  homepage: https://github.com/Sprayer115/expense-tracker-skill
 ---
 
 # Expense Tracker
