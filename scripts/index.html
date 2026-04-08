@@ -3,40 +3,61 @@
 <head><meta charset="utf-8"></head>
 <body>
 <script>
+// POST via XMLHttpRequest, following the 302 redirect that Google Apps Script returns.
+// XHR follows redirects automatically and works reliably in iOS WKWebView.
+function postToWebhook(url, body) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'text/plain');
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        resolve(xhr.responseText);
+      } else {
+        reject(new Error('HTTP ' + xhr.status + ': ' + xhr.statusText));
+      }
+    };
+    xhr.onerror = function() {
+      reject(new Error('Network error (XHR). Check that the webhook URL is correct and reachable.'));
+    };
+    xhr.ontimeout = function() {
+      reject(new Error('Request timed out after 15s.'));
+    };
+    xhr.timeout = 15000;
+    xhr.send(body);
+  });
+}
+
 window['ai_edge_gallery_get_result'] = async function(data, secret) {
   try {
     var payload = JSON.parse(data);
+    var url = (secret || '').trim();
 
-    if (!secret || secret.trim() === '') {
-      return JSON.stringify({ error: 'No webhook URL set. Please add your Google Apps Script Web App URL as the skill secret.' });
+    if (!url) {
+      return JSON.stringify({ error: 'Secret not set. Paste your Google Apps Script Web App URL as the skill secret.' });
     }
 
-    // Content-Type: text/plain avoids a CORS preflight (OPTIONS) request,
-    // which Apps Script doesn't handle. The body is still valid JSON.
-    // fetch() automatically switches to GET when following the Apps Script 302 redirect.
     var body = JSON.stringify(payload);
-    var response = await fetch(secret.trim(), {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: body
-    });
+    var responseText = await postToWebhook(url, body);
 
-    if (!response.ok) {
-      return JSON.stringify({ error: 'HTTP ' + response.status + ': ' + response.statusText });
+    var result;
+    try {
+      result = JSON.parse(responseText);
+    } catch (e) {
+      // Response wasn't JSON — return a snippet so we can diagnose
+      return JSON.stringify({ error: 'Unexpected response (not JSON): ' + responseText.substring(0, 200) });
     }
-
-    var result = await response.json();
 
     if (result.error) {
-      return JSON.stringify({ error: result.error });
+      return JSON.stringify({ error: 'Apps Script error: ' + result.error });
     }
 
     return JSON.stringify({
-      result: 'Expense logged: ' + payload.date + ' | ' + payload.amount + ' | ' + payload.category + ' | ' + payload.description
+      result: 'Logged: ' + payload.date + ' | €' + payload.amount + ' | ' + payload.category + ' | ' + payload.description
     });
 
   } catch (e) {
-    return JSON.stringify({ error: e.message });
+    return JSON.stringify({ error: 'JS error: ' + e.message });
   }
 };
 </script>

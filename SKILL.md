@@ -33,8 +33,8 @@ Once confirmed (or if the user says to just log it), call `run_js` with:
   `{"date":"2026-04-08","amount":12.50,"category":"Food","description":"Groceries at Rewe","payment_method":"Card"}`
 
 After the tool returns:
-- If `result` is present: tell the user the expense was logged successfully.
-- If `error` is present: tell the user something went wrong and show the error message.
+- If `result` is present: tell the user the expense was logged successfully, showing the logged details.
+- If `error` is present: tell the user exactly what the error says, word for word. Do not paraphrase or suggest setup steps — just quote the error directly.
 
 ## Setup
 
