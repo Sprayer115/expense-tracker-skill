@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body>
+<script>
+window['ai_edge_gallery_get_result'] = async function(data, secret) {
+  try {
+    var payload = JSON.parse(data);
+
+    if (!secret || secret.trim() === '') {
+      return JSON.stringify({ error: 'No webhook URL set. Please add your Google Apps Script Web App URL as the skill secret.' });
+    }
+
+    // Content-Type: text/plain avoids a CORS preflight (OPTIONS) request,
+    // which Apps Script doesn't handle. The body is still valid JSON.
+    // fetch() automatically switches to GET when following the Apps Script 302 redirect.
+    var body = JSON.stringify(payload);
+    var response = await fetch(secret.trim(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: body
+    });
+
+    if (!response.ok) {
+      return JSON.stringify({ error: 'HTTP ' + response.status + ': ' + response.statusText });
+    }
+
+    var result = await response.json();
+
+    if (result.error) {
+      return JSON.stringify({ error: result.error });
+    }
+
+    return JSON.stringify({
+      result: 'Expense logged: ' + payload.date + ' | ' + payload.amount + ' | ' + payload.category + ' | ' + payload.description
+    });
+
+  } catch (e) {
+    return JSON.stringify({ error: e.message });
+  }
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -L -X POST \"https://script.google.com/macros/s/AKfycbycMIN3geTEzuI2nPlkHZQBOuSA4nvtbehUTSqtapy6Hezu0YcIyir1ydyjRbU4rHUz/exec\" -H \"Content-Type: application/json\" -d '{\"date\":\"2026-04-08\",\"amount\":9.99,\"category\":\"Food\",\"description\":\"Test coffee\",\"payment_method\":\"Card\"}')",
+      "Bash(curl -sv -X POST \"https://script.google.com/macros/s/AKfycbycMIN3geTEzuI2nPlkHZQBOuSA4nvtbehUTSqtapy6Hezu0YcIyir1ydyjRbU4rHUz/exec\" -H \"Content-Type: application/json\" -d '{\"date\":\"2026-04-08\",\"amount\":9.99}')",
+      "Bash(curl -s -X POST \"https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMUUqKIyeuXyxwkC_lOAZhk5dSPxleUME4mBzUv_3HzVr_V368zI0XEQAmyJm26p__SzgxNb7ofs4F6tFv9mrfGfp2NYbOujY6pxsYq66QoGHUxOqOnHc9DBmwRNOpg-EuouQaAQbpM8xyTsolHDcaoUmQEQaMNoeRuy-QxRxv9kjvMTAzn1NiOP_C3pM6U8YbB6koqBQbX5W6BOTWPE3-uzu4g_frHLh21yI3SLDI_ibtIV7GSPtLaAT0tj9k0yOSiOfKyFatLxzAqQRbo-HEXx1wbwBw&lib=MzhSSv_Bq0J43Amt-cKgZB89owhmw9jII\" -H \"Content-Type: application/json\" -d '{\"date\":\"2026-04-08\",\"amount\":9.99,\"category\":\"Food\",\"description\":\"Test coffee\",\"payment_method\":\"Card\"}')",
+      "Bash(curl -s -L --post302 -X POST \"https://script.google.com/macros/s/AKfycbycMIN3geTEzuI2nPlkHZQBOuSA4nvtbehUTSqtapy6Hezu0YcIyir1ydyjRbU4rHUz/exec\" -H \"Content-Type: application/json\" -d '{\"date\":\"2026-04-08\",\"amount\":9.99,\"category\":\"Food\",\"description\":\"Test coffee\",\"payment_method\":\"Card\"}')",
+      "Bash(curl -sv -L --post302 -X POST \"https://script.google.com/macros/s/AKfycbycMIN3geTEzuI2nPlkHZQBOuSA4nvtbehUTSqtapy6Hezu0YcIyir1ydyjRbU4rHUz/exec\" -H \"Content-Type: application/json\" -d '{\"date\":\"2026-04-08\",\"amount\":9.99,\"category\":\"Food\",\"description\":\"Test coffee\",\"payment_method\":\"Card\"}')",
+      "Bash(curl -s -L \"https://script.google.com/macros/s/AKfycbycMIN3geTEzuI2nPlkHZQBOuSA4nvtbehUTSqtapy6Hezu0YcIyir1ydyjRbU4rHUz/exec\" -H \"Content-Type: application/json\" -d '{\"date\":\"2026-04-08\",\"amount\":9.99,\"category\":\"Food\",\"description\":\"Test coffee\",\"payment_method\":\"Card\"}')",
+      "Bash(git -C /c/Users/iLux1/entwicklung/excel-ai-skill/ status)",
+      "Bash(gh auth:*)",
+      "Bash(gh api:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)"
+    ]
+  }
+}
