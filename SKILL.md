@@ -104,7 +104,7 @@ If you see a Google login page or 403, re-check the deployment settings (Access 
 **Step 2 — POST test with curl**
 
 ```bash
-curl -s -L 'https://script.google.com/macros/s/AKfycbycMIN3geTEzuI2nPlkHZQBOuSA4nvtbehUTSqtapy6Hezu0YcIyir1ydyjRbU4rHUz/exec' -H 'Content-Type: application/json' -d '{"date":"2026-04-08","amount":9.99,"category":"Food","description":"Test coffee","payment_method":"Card"}'
+curl -s -L 'YOUR_WEB_APP_URL' -H 'Content-Type: application/json' -d '{"date":"2026-04-08","amount":9.99,"category":"Food","description":"Test coffee","payment_method":"Card"}'
 ```
 
 Expected response: `{"result":"ok"}`
